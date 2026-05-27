@@ -1,4 +1,14 @@
 import unittest
+from inspect import getsourcefile
+import os.path
+import sys
+current_path = os.path.abspath(getsourcefile(lambda:0))
+current_dir = os.path.dirname(current_path)
+parent_dir = current_dir[:current_dir.rfind(os.path.sep)]
+sys.path.insert(0, parent_dir)
+
+
+
 from textnode import TextNode, TextType
 from split_utils import split_nodes_delimiter, extract_markdown_images, extract_markdown_links, split_nodes_image, split_nodes_link,text_to_nodes
 
