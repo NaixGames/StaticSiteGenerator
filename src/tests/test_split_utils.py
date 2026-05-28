@@ -12,7 +12,7 @@ sys.path.insert(0, parent_dir)
 from textnode import TextNode, TextType
 from split_utils import split_nodes_delimiter, extract_markdown_images, extract_markdown_links, split_nodes_image, split_nodes_link,text_to_nodes
 
-class TestTSplitUtils(unittest.TestCase):
+class TestSplitUtils(unittest.TestCase):
     def test_code_split(self):
         node = TextNode("This is text with a `code block` word", TextType.TEXT)
         new_nodes = split_nodes_delimiter([node], "`", TextType.CODE)
