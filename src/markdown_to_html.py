@@ -81,28 +81,30 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
             base_node.children.append(parent_node)
             continue
 
-        if (block == BlockType.UNORDERED_LIST):
+        if (block_type == BlockType.UNORDERED_LIST):
             unordered_elements = get_unordered_list_lines(block)
 
             parent_node = HTMLNode("ul")
+            parent_node.children = []
 
             for line in unordered_elements:
                 new_node = HTMLNode("li")
                 new_node.children = child_text_to_html(line)
-                parent_node.append(new_node)
+                parent_node.children.append(new_node)
 
             base_node.children.append(parent_node)
             continue
 
-        if (block == BlockType.ORDERED_LIST):
+        if (block_type == BlockType.ORDERED_LIST):
             ordered_elements = get_ordered_list_lines(block)
 
             parent_node = HTMLNode("ol")
+            parent_node.children = []
 
-            for line in unordered_elements:
+            for line in ordered_elements:
                 new_node = HTMLNode("li")
                 new_node.children = child_text_to_html(line)
-                parent_node.append(new_node)
+                parent_node.children.append(new_node)
 
             base_node.children.append(parent_node)
             continue
