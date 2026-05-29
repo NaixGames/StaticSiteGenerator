@@ -27,6 +27,11 @@ def get_coded_text(code_text: str) -> str:
         return text[:-4]
     return text[:-3]
 
+def get_ordered_list_lines(list: str) -> list[str]:
+    pass
+
+def get_unordered_list_lines(list: str) -> list[str]:
+    pass
 
 
 def markdown_to_html_node(markdown: str) -> HTMLNode:
@@ -67,7 +72,7 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
 
         if block_type == BlockType.PARAGRAPH:
             parent_node = HTMLNode("p")
-            parent_node.children = child_text_to_html(block)
+            parent_node.children = child_text_to_html(block) #Maybe I should replace new line with spaces?
             continue
 
 
