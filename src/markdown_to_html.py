@@ -27,15 +27,32 @@ def get_coded_text(code_text: str) -> str:
         return text[:-4]
     return text[:-3]
 
-def get_ordered_list_lines(list: str) -> list[str]:
-    pass
+def get_ordered_list_lines(text: str) -> list[str]:
+    lines = text.split("\n")
 
-def get_unordered_list_lines(list: str) -> list[str]:
-    pass
+    answer = []
+
+    for line in lines:
+        start_ind = line.find(", ")
+
+        answer.append(line[start_ind+2:])
+
+    return answer
+
+def get_unordered_list_lines(text: str) -> list[str]:
+    lines = text.split("\n")
+
+    answer = []
+
+    for line in lines:
+        answer.append(line[2:])
+
+    return answer
 
 
 def markdown_to_html_node(markdown: str) -> HTMLNode:
     blocks = markdown_to_blocks(markdown)
+
 
     base_node = HTMLNode("div")
     base_node.children = []
@@ -65,24 +82,41 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
             continue
 
         if (block == BlockType.UNORDERED_LIST):
+            unordered_elements = get_unordered_list_lines(block)
+
+            parent_node = HTMLNode("ul")
+
+            for line in unordered_elements:
+                new_node = HTMLNode("li")
+                new_node.children = child_text_to_html(line)
+                parent_node.append(new_node)
+
+            base_node.children.append(parent_node)
             continue
 
         if (block == BlockType.ORDERED_LIST):
+            ordered_elements = get_ordered_list_lines(block)
+
+            parent_node = HTMLNode("ol")
+
+            for line in unordered_elements:
+                new_node = HTMLNode("li")
+                new_node.children = child_text_to_html(line)
+                parent_node.append(new_node)
+
+            base_node.children.append(parent_node)
             continue
 
         if block_type == BlockType.PARAGRAPH:
             parent_node = HTMLNode("p")
+            block = block.replace("\n", " ")
             parent_node.children = child_text_to_html(block) #Maybe I should replace new line with spaces?
+            base_node.children.append(parent_node)
             continue
 
 
         raise Exception("Request with block type that is not implemented")
 
     return base_node
-
-
-
-
-
 
 
