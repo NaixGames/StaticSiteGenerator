@@ -1,8 +1,9 @@
 from textnode import TextType, TextNode
+from static_to_public import static_to_public
+
 
 def main() -> None:
-    dummy_text_node = TextNode("This is some anchor text", TextType["LINK"], "https;//potito.com")
-    print(dummy_text_node)
+    static_to_public()
 
 if __name__ == "__main__":
     main()
