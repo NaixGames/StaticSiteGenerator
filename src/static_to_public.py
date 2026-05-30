@@ -16,7 +16,7 @@ def copy_files_to_path_with_delete(src_path: str, dst_path: str, confirmation: b
 
     if os.path.exists(dst_path):
         print(f"Cleaning existing {dst_path}")
-        os.removedirs(dst_path)
+        shutil.rmtree(dst_path)
 
     print(f"Creating folder {dst_path}")
     os.mkdir(dst_path)
