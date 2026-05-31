@@ -41,9 +41,9 @@ class TestBlockTypeUtils(unittest.TestCase):
         self.assertEqual(block_to_block_type(text10), BlockType.UNORDERED_LIST)
         self.assertEqual(block_to_block_type(text11), BlockType.PARAGRAPH)
 
-        text12 = "1, This is\n2, an ordered\n3, list"
-        text13 = "0, This is\n1, not an ordered list"
-        text14 = "0,This is not an ordered list"
+        text12 = "1. This is\n2. an ordered\n3. list"
+        text13 = "0. This is\n1. not an ordered list"
+        text14 = "0.This is not an ordered list"
         self.assertEqual(block_to_block_type(text12), BlockType.ORDERED_LIST)
         self.assertEqual(block_to_block_type(text13), BlockType.PARAGRAPH)
         self.assertEqual(block_to_block_type(text14), BlockType.PARAGRAPH)
