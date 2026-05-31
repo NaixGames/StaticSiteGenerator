@@ -43,6 +43,27 @@ def generate_page(from_path: str, template_path: str, des_path: str) -> None:
     generated_html = template_text.replace("{{ Content }}", html)
 
     abs_dst_path = os.path.abspath(des_path)
+    if not os.path.exists(os.path.dirname(abs_dst_path)):
+        os.makedirs(os.path.dirname(abs_dst_path))
     
     with open(abs_dst_path, "w") as f:
         template_text = f.write(generated_html)
+
+def generate_pages_recursively(src_home_path: str, template_path: str, base_des_path: str) -> None:
+    abs_src_directory = os.path.abspath(src_home_path)
+    abs_dst_path = os.path.abspath(base_des_path)
+    abs_template_path = os.path.abspath(template_path)
+
+    generate_page_in_folder(abs_src_directory, abs_template_path, abs_dst_path)
+
+
+def generate_page_in_folder(abs_src: str, abs_template: str, abs_dst: str) -> None:
+    elements = os.listdir(abs_src)
+
+    for element in elements:
+        if os.path.isdir(abs_src + "/" + element):
+            generate_page_in_folder(abs_src + "/" + element, abs_template, abs_dst + "/" + element)
+            continue
+
+        if os.path.isfile(abs_src + "/" + element) and element.endswith(".md"):
+            generate_page(abs_src + "/" + element, abs_template, abs_dst + "/" + element[:-3]+".html")
