@@ -40,7 +40,7 @@ def generate_page(from_path: str, template_path: str, des_path: str) -> None:
     title = extract_title(md_text)
     
     generated_html = template_text.replace("{{ Title }}", title)
-    generated_html = template_text.replace("{{ Content }}", html)
+    generated_html = generated_html.replace("{{ Content }}", html)
 
     abs_dst_path = os.path.abspath(des_path)
     if not os.path.exists(os.path.dirname(abs_dst_path)):
