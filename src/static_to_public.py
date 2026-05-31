@@ -2,7 +2,7 @@ import os
 import shutil
 
 def static_to_public() -> None:
-    copy_files_to_path_with_delete("./static", "./public")
+    copy_files_to_path_with_delete("./static", "./docs")
 
 def copy_files_to_path_with_delete(src_path: str, dst_path: str) -> None:
     abs_src_directory = os.path.abspath(src_path)
