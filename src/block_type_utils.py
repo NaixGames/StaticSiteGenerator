@@ -50,11 +50,11 @@ def is_ordered_list(text: str) -> bool:
     for i in range(0, len(splited_lines)):
         line = splited_lines[i]
 
-        start_ind = line.find(", ")
+        start_ind = line.find(". ")
         if (start_ind == -1):
             return False
         
-        if line[0:start_ind + 2] != f"{i+1}, ":
+        if line[0:start_ind + 2] != f"{i+1}. ":
             return False
         
     return True

@@ -27,13 +27,26 @@ def get_coded_text(code_text: str) -> str:
         return text[:-4]
     return text[:-3]
 
+def get_quote_tex(quote_text: str) -> str:
+    split_lines = quote_text.split("\n")
+    ans = ""
+
+    for line in split_lines:
+        if (len(line) < 2):
+            continue
+        if line[1] == " ":
+            ans += line[2:] + "\n"
+            continue
+        ans += line[1:]+"\n"
+    return ans
+
 def get_ordered_list_lines(text: str) -> list[str]:
     lines = text.split("\n")
 
     answer = []
 
     for line in lines:
-        start_ind = line.find(", ")
+        start_ind = line.find(". ")
 
         answer.append(line[start_ind+2:])
 
@@ -48,6 +61,7 @@ def get_unordered_list_lines(text: str) -> list[str]:
         answer.append(line[2:])
 
     return answer
+
 
 
 def markdown_to_html_node(markdown: str) -> HTMLNode:
@@ -77,7 +91,8 @@ def markdown_to_html_node(markdown: str) -> HTMLNode:
 
         if (block_type == BlockType.QUOTE):
             parent_node = HTMLNode("blockquote")
-            parent_node.children = child_text_to_html(block[1:]) #Clean the first character, the >
+            qt = get_quote_tex(block)
+            parent_node.children = child_text_to_html(qt)
             base_node.children.append(parent_node)
             continue
 
