@@ -39,7 +39,7 @@ def generate_page(from_path: str, template_path: str, des_path: str) -> None:
     html = html_node.to_html()
     title = extract_title(md_text)
     
-    generated_html = template_text.replace("{{ Title  }}", title)
+    generated_html = template_text.replace("{{ Title }}", title)
     generated_html = template_text.replace("{{ Content }}", html)
 
     abs_dst_path = os.path.abspath(des_path)
