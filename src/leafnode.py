@@ -5,8 +5,8 @@ class LeafNode(HTMLNode):
         super().__init__(tag, value, None, props)
 
     def to_html(self):
-        if (self.value == None or self.value == ""):
-            raise ValueError("LeafNode needs to have a value to be rendered!")
+        if (self.value == None):
+            raise ValueError(f"LeafNode with tag {self.tag} needs to have a value to be rendered!")
         
         if (self.tag == None or self.tag == ""):
             return self.value

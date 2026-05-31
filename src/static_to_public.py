@@ -2,17 +2,13 @@ import os
 import shutil
 
 def static_to_public() -> None:
-    copy_files_to_path_with_delete("./static", "./public", True)
+    copy_files_to_path_with_delete("./static", "./public")
 
-def copy_files_to_path_with_delete(src_path: str, dst_path: str, confirmation: bool = False) -> None:
+def copy_files_to_path_with_delete(src_path: str, dst_path: str) -> None:
     abs_src_directory = os.path.abspath(src_path)
     dst_path = os.path.abspath(dst_path)
     
     print(f"This will copy everything in {abs_src_directory} to {dst_path}")
-
-    if not confirmation:
-        print("Exiting because you missed confirmation")
-        return;
 
     if os.path.exists(dst_path):
         print(f"Cleaning existing {dst_path}")
